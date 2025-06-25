@@ -18,7 +18,7 @@ body {
 .open {
   background-image: linear-gradient(#22d1ee, #3d5af1, #5aaeff);
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   position: fixed;
   top: 0;
   display: flex;
