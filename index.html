@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HBD</title>
+  <link rel="icon" href="img/favicon.png" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+      background: linear-gradient(#22d1ee, #3d5af1, #5aaeff);
+      background-attachment: fixed;
+      overflow-x: hidden;
+      max-width: 100%;
+      min-height: 100vh;
+    }
+
+    * {
+      color: #383838;
+    }
+
+    img, audio {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .open {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#22d1ee, #3d5af1, #5aaeff);
+      padding: 20px;
+    }
+
+    .open .card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .open .card img {
+      height: 100px;
+      margin: 20px auto;
+      cursor: pointer;
+    }
+
+    .atas {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .atas img {
+      max-width: 150px;
+      padding: 15px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .atas h2 {
+      font-size: 1.2rem;
+      padding: 15px 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .kartu-ucapan {
+      text-align: center;
+      background: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 30px 20px;
+      margin: 20px auto;
+      border-radius: 20px;
+      max-width: 500px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .kartu-ucapan img {
+      border-radius: 20px;
+    }
+
+    .tanya {
+      display: block;
+      text-align: center;
+      background-color: #2fe965;
+      font-weight: bold;
+      font-size: 1.5rem;
+      padding: 30px 20px;
+      margin: 20px auto;
+      border-radius: 20px;
+      max-width: 500px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      color: white;
+    }
+
+    .wish {
+      display: block;
+      width: 50%;
+      max-width: 120px;
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+
+    @media screen and (max-width: 600px) {
+      .open .card img {
+        max-width: 100px;
+        height: auto;
+      }
+
+      .atas img {
+        max-width: 330px;
+        height: auto;
+      }
+
+      .atas h2,
+      .open .card h2,
+      .open .card h3,
+      .kartu-ucapan,
+      .tanya,
+      .footer {
+        font-size: 1rem;
+      }
+
+      .tanya {
+        padding: 20px 15px;
+      }
+
+      .wish {
+        max-width: 90px;
+      }
+      
+      .footer {
+        font-size: 0.95rem;
+      }
+
+    }
+    
+  </style>
+</head>
+<body>
+  <audio class="audio" src="" autoplay loop></audio>
+
+  <div class="open">
+    <div class="card">
+      <h2>Ada surat buat kamu Andin</h2>
+      <img onclick="mulai()" src="mail.png" alt="buka surat">
+      <h3>Tekan coba</h3>
+    </div>
+  </div>
+
+  <div class="atas" id="atas">
+    <img onclick="mulai()" src="download-removebg-preview.png" alt="logo">
+    <h2>Scroll ke bawah &#10083;</h2>
+  </div>
+
+  <p class="kartu-ucapan" data-aos="fade-right">&#127881 HAPPY BIRTHDAY</p>
+  <p class="kartu-ucapan" data-aos="fade-left">Panjang Umur &#10084;</p>
+  <p class="kartu-ucapan" data-aos="flip-right"><img src="IMG_20220418_091001_674.webp" alt="foto"></p>
+
+  <a onclick="tanya()" data-aos="zoom-out-down" class="tanya">
+    <img src="makeawish.png" class="wish" alt="kado">
+    Make a Wish!
+  </a>
+
+  <!-- <footer>
+    <a class="footer" href="#">Dibuat oleh griselll</a>
+  </footer> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const musik = ""; // ganti jadi path audio kamu
+    const audio = document.querySelector(".audio");
+    if (musik) {
+      audio.src = musik;
+    }
+
+    function mulai() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      audio.play().catch(() => console.warn("Autoplay mungkin diblokir."));
+      const openScreen = document.querySelector(".open");
+      openScreen.style.transition = "opacity 1s ease";
+      openScreen.style.opacity = "0";
+      setTimeout(() => {
+        openScreen.style.display = "none";
+        document.body.style.overflowY = "auto";
+      }, 1000);
+    }
+
+    function wa(isi) {
+      const link = "https://api.whatsapp.com/send?text=" + encodeURIComponent(isi);
+      window.open(link, "_blank");
+    }
+
+    async function tanya() {
+      const { value: kado } = await Swal.fire({
+        imageUrl: "IMG_20220418_091001_674.webp",
+        title: "Hari ini mau apa?",
+        input: "text",
+        inputPlaceholder: "Tulis harapanmu di sini...",
+        confirmButtonText: "Kirim",
+      });
+
+      if (kado) {
+        await Swal.fire({
+          imageUrl: "wa.png",
+          title: "Kirim jawaban ke WhatsApp",
+          confirmButtonText: "Yuk!",
+        });
+        wa(kado);
+      } else {
+        await Swal.fire({
+          icon: "error",
+          title: "Jangan kosong dong!",
+          confirmButtonText: "Ulangi",
+        });
+        tanya();
+      }
+    }
+  </script>
+</body>
+</html>
